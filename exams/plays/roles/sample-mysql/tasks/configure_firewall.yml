@@ -1,0 +1,20 @@
+---
+- name: Install Firewalld
+  yum:
+    name: firewalld
+    state: latest
+
+- name: Start Enable Firewalld service
+  service: 
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Allow rules in Firewalld
+  firewalld:
+    service: mysql
+    state: enabled
+    permanent: yes
+    immediate: yes
+  notify: Restart Firewall
+

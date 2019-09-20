@@ -1,0 +1,25 @@
+---
+- name: TASK15 - Work with Ansible Facts
+  hosts: database
+  become: yes
+  vars:
+    facts_dir: /etc/ansible/facts.d
+    facts_file: custom.fact
+  tasks:
+  
+    - name: Create Custom Facts Directory
+      file:
+        path: "{{ facts_dir }}"
+        state: directory
+        recurse: yes
+        owner: root
+        group: root
+
+    - name: copy facts to remote hosts
+      copy:
+        src: "{{ facts_file }}"
+        dest: "{{ facts_dir }}/{{ facts_file }}"
+
+    - name: Reload Facts
+      setup:
+

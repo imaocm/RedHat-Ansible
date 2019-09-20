@@ -1,0 +1,19 @@
+---
+- name: test playbook
+  hosts: webservers
+  become: yes
+  tasks:
+
+    - name: Check if Mariadb is Running
+      command: "systemctl status mariadb"
+      ignore_errors: yes
+      register: output
+
+    - name: Debug the Ouput
+      debug: 
+        var: output
+
+    - name: Testing Conditionals
+      debug:
+        msg: " Heey Yo! "
+      when: output.rc == 0

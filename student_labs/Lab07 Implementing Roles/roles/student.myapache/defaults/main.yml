@@ -1,0 +1,5 @@
+---
+# defaults file for roles/student.myapache
+
+apache_enable: false
+

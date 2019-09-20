@@ -1,0 +1,37 @@
+
+- name: Install Required Packages
+  yum:
+    name:
+      - MySQL-python
+      - mariadb-server
+    state: latest
+
+
+- name: Start Enable Mariadb Service
+  service:
+    name: mariadb
+    state: started
+    enabled: true
+
+- block:
+  - name: Set MySQL Root Password
+    mysql_user:
+      name: root
+      password: "{{ database_password_new }}"
+  rescue:
+  - name: Set MySQL Root Password
+    mysql_user:
+      name: root
+      password: "{{ database_password_new }}"
+      login_password: "{{ database_password_new }}"
+      state: present
+
+- name: Tune Mariadb Server
+  template:
+    src: my.cnf.j2
+    dest: my.cnf
+    mode: 0644
+    owner: root
+    group: root
+  notify: Restart MySQL
+

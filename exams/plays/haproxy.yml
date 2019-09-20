@@ -1,0 +1,14 @@
+---
+- name: TASK11 - Download Roles From an Ansible Galaxy and Use Them
+  become: yes
+  hosts: proxy
+  vars:
+    haproxy_backend_balance_method: 'roundrobin'
+    haproxy_backend_servers: 
+       - name: ansible1.example.com
+         address: 192.168.1.11:80
+       - name: ansible2.example.com
+         address: 192.168.1.12:80
+  roles:
+    - geerlingguy.haproxy
+

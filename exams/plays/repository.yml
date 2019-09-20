@@ -1,0 +1,15 @@
+---
+- name: TASK8 - Software Repositories
+  hosts: database
+  become: yes
+  tasks:
+
+    - name: Create Repo mysql56-community
+      yum_repository:
+        name: "mysql56-community"
+        description: "MySQL 5.6 YUM Repo"
+        enabled: yes
+        gpgcheck: yes
+        gpgkey: "http://repo.mysql.com/RPM-GPG-KEY-mysql"
+        baseurl: "http://repo.mysql.com/yum/mysql-5.6-community/el/7/x86_64/"
+

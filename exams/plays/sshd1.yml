@@ -1,0 +1,19 @@
+--- 
+- name: TASK4 - Configure SSH Server
+  hosts: all
+  become: yes
+  vars:
+    options:
+       Banner: /etc/motd
+       X11Forwarding: "no"
+       MaxAuthTries: 3
+
+  tasks:
+
+    - name: Edit the SSH Configuration
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regex: "{{ item.key }}"
+        line: "{{item.key }} {{ item.value }}"
+      with_dict: "{{ options }}"
+      

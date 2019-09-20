@@ -1,0 +1,13 @@
+---
+# handlers file for roles/sample-mysql
+#
+- name: Restart Firewall
+  service: 
+    name: firewalld
+    state: reloaded
+
+- name: Restart MySQL
+  service: 
+    name: mariadb
+    state: restarted
+

@@ -1,0 +1,36 @@
+---
+- name: TASK3 - File Content
+  hosts: all
+  become: yes
+  vars:
+    motd:
+       proxy: "Welcome to HAProxy server \n"
+       web: "Welcome to Apache server \n"
+       db: "Welcome to MySQL server \n"
+  tasks:
+
+  - name: Editing Proxy
+    copy: 
+      content: "{{ motd.proxy }}"
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+    when: inventory_hostname in groups['proxy']
+  - name: Editing WebServers
+    copy: 
+      content: "{{ motd.web }}"
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+    when: inventory_hostname in groups['webservers']
+  - name: Editing Databsae
+    copy: 
+      content: "{{ motd.db }}"
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+    when: inventory_hostname in groups['database']
+

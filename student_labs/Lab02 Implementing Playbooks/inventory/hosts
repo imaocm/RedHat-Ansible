@@ -1,0 +1,7 @@
+[webservers]
+ansible1.example.com
+ansible2.example.com
+
+[databases]
+ansible3.example.com
+ansible4.example.com

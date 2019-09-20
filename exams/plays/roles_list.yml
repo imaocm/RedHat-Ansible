@@ -1,0 +1,5 @@
+---
+#From Ansible Galaxy
+
+- src: geerlingguy.haproxy
+- src: linux-system-roles.selinux

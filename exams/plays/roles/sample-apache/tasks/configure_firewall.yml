@@ -1,0 +1,20 @@
+---
+- name: Install Firewall Package
+  yum: 
+    name: firewalld
+    state: latest
+
+- name: Start and Enable Firewall service
+  service:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Allow rules in Firewall
+  firewalld:
+    service: "{{ item }}"
+    state: enabled
+    immediate: true
+    permanent: true
+  with_items: "{{ rules }}"
+  notify: Reload Firewall

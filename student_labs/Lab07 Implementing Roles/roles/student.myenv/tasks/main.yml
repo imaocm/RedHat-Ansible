@@ -1,0 +1,30 @@
+---
+# tasks file for roles/student.myenv---
+
+- name: Check if myenv_user is defined
+  fail:
+    msg: " myenv_user is empty "
+  when: "myenv_user == '' "
+- name: Install required packages
+  yum:
+    name: "{{ myenv_packages }}"
+    state: latest
+
+- name: Copy the profile pics
+  copy:
+    src: profile.png
+    dest: "/home/{{ myenv_user }}/profile.png"
+
+- name: Add Alias to User Bashrc
+  lineinfile:
+    path: "/home/{{ myenv_user }}/.bashrc"
+    line: "alias tree='tree -C' "
+
+- name: Install template
+  template:
+    src: mkcd.sh.j2
+    dest: /etc/profile.d/mkcd.sh
+    owner: root
+    group: root
+    mode: 0644
+

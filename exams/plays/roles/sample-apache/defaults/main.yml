@@ -1,0 +1,5 @@
+---
+# defaults file for roles/sample-apache
+
+web_root: /var/www/html
+

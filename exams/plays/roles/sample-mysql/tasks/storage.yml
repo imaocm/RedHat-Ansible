@@ -1,0 +1,40 @@
+
+- name: Create a 800MB Partition on /dev/sdb
+  parted:
+    device: /dev/sdb
+    number: 1
+    part_end: 800MB
+    state: present
+
+- name: Create a Volume Group "vg_database" 
+  lvg:
+    vg: vg_database
+    pvs: /dev/sdb1
+    state: present
+
+- name: Create a Logical Volume "lv_mysql"
+  lvol:
+    lv: lv_mysql
+    vg: vg_database
+    size: 512m
+
+- name: Create an XFS FileSystem on "lv_mysql"
+  filesystem:
+    fstype: xfs
+    dev: /dev/vg_database/lv_mysql
+    opts: "-L XFS_MYSQL"
+
+- name: Create the Mount Directory
+  file:
+    path: /mnt/mysql_backups
+    state: directory
+
+- name: Mount the FileSystem permanently
+  mount:
+    path: /mnt/mysql_backups
+    src: LABEL=XFS_MYSQL
+    fstype: xfs
+    state: present
+    opts: default
+
+    

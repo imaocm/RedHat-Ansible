@@ -1,0 +1,43 @@
+---
+- name: Lab Implementing Task Control
+  hosts: webservers
+  become: yes
+  tasks:
+  - block:
+    - name: Install Packages
+      include_tasks: install_package.yml
+      vars:
+        memory: 256
+        web_package: httpd
+        web_service: httpd
+    - name: Configure Web Service
+      include_tasks: configure_web.yml
+      vars:
+        https_uri: http://material.example.com/lab4/https.conf
+        ssl_uri: http://material.example.com/lab4/ssl.tar.gz
+
+    - name: Configure Firewall
+      include_tasks: configure_firewall.yml
+      vars:
+        fw_package: firewalld
+        fw_service: firewalld
+      tags: production
+    rescue:
+    - name: Install HTTP Service
+      yum:
+        name: httpd
+        state: latest
+      notify: restart_services
+    always:
+    - name: Check HTTP Package is installed
+      shell: "systemctl status httpd"
+
+  handlers:
+    - name: restart_services
+      service:
+        name: "{{ item }}"
+        state: restarted
+      with_items:
+        - httpd
+        - firewalld
+

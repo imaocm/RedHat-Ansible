@@ -1,0 +1,11 @@
+- hosts: webservers
+  become: yes
+  vars:
+    memory: 170
+  tasks:
+    - name: Test
+      debug: 
+        msg: "Its Up"
+      when: " ansible_memfree_mb  >  memory "
+
+

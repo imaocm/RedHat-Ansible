@@ -1,0 +1,15 @@
+---
+- name: TASK7 - Scheduled Tasks
+  become: yes
+  hosts: proxy
+  tasks:
+
+    - name: Create the File directory
+      shell: "touch /var/log/time.log creates=/var/log/time.log"
+
+    - name: Setup the cron
+      cron:
+        name: time
+        minute: 0
+        job: "echo $(date)"
+

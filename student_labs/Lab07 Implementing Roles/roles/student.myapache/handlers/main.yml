@@ -1,0 +1,8 @@
+---
+# handlers file for roles/student.myapache
+
+- name: Restart httpd
+  service:
+    name: httpd
+    state: restarted
+

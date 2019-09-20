@@ -1,0 +1,4 @@
+ansible-playbook  --syntax-check playbook.yml  
+ansible-playbook  --check playbook.yml
+ansible-playbook  -C playbook.yml
+ansible-playbook --step playbook.yml

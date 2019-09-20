@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#Create User Automation
+ansible all -m user -a " name=automation shell=/bin/bash comment='An Ansible User !' password='{{ 'devops' | password_hash('sha512') }}' update_password=on_create  "  -b -u root
+# Copy SSH Keys
+ansible all -m authorized_key -a " user=automation key='{{ lookup('file', '/home/automation/.ssh/id_rsa.pub') }}' " -b -u root
+
+
+# Escalate Privilege
+ansible all -m copy -a "content='automation ALL=(ALL) NOPASSWD: ALL' dest=/etc/sudoers.d/automation mode=0644 owner=root group=root " -b -u root

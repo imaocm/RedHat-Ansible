@@ -1,0 +1,9 @@
+---
+- name: Using myapache role
+  hosts: webservers
+  become: yes
+  vars:
+    apache_enable: true
+  roles:
+    - student.myapache
+

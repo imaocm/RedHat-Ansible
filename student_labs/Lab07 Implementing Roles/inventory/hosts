@@ -1,0 +1,10 @@
+[webservers]
+ansible1.example.com
+ansible2.example.com
+
+[databases]
+ansible3.example.com
+
+[lbservers]
+ansible3.example.com
+material.example.com

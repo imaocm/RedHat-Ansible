@@ -1,0 +1,24 @@
+---
+- name: TASK13 - Use Conditionals to Control Play Execution
+  hosts: all:localhost
+  become: yes
+  vars:
+    host_memory: 2048
+  tasks:
+
+
+  - block:
+    - name: Performance tunning for servers
+      sysctl:
+        name: vm.swappiness
+        value: 10
+        state: present
+        reload: yes
+      when: 
+          - "ansible_memtotal_mb >=  host_memory "
+    - name: Print error
+      fail:
+        msg: "Server memory less than {{ host_memory }}"
+      when:
+          - "ansible_memtotal_mb <=  host_memory "
+

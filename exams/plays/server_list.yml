@@ -1,0 +1,18 @@
+---
+- name: TASK18 - Create and Use Templates to Create Customised Configuration Files
+  hosts: database
+  become: yes
+  vars:
+    mode: 0600
+    scontext: net_conf_t
+    owner: automation
+  tasks:
+  
+  - name: Create Template file
+    template:
+      src: server_list.j2
+      dest: /etc/server_list.txt
+      owner: "{{ owner }}"
+      setype: "{{ scontext }}"
+      mode: "{{ mode }}"
+

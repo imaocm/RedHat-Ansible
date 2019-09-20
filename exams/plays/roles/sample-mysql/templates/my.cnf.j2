@@ -1,0 +1,12 @@
+[mysqld_safe]
+socket = /var/run/mysqld/mysqld.sock
+nice = 0
+
+[mysqld]
+bind-address = {{ ansible_default_ipv4.address }}
+skipe_name_resolve
+datadir = /var/lib/mysql
+user = mysql
+socket = /var/run/mysqld/mysqld.sock
+
+

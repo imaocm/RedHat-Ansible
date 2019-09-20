@@ -1,0 +1,8 @@
+---
+- name: using the myenv role
+  hosts: ansible2.example.com
+  become: yes
+  vars:
+    myenv_user: automation
+  roles:
+    - student.myenv

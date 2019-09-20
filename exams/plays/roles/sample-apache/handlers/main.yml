@@ -1,0 +1,14 @@
+---
+# handlers file for roles/sample-apache
+
+- name: Reload Firewall
+  service: 
+    name: firewalld
+    state: reloaded
+
+
+- name: Reload Apache
+  service: 
+    name: "{{ item }}"
+    state: restarted
+  with_items: "{{ web_service }}"

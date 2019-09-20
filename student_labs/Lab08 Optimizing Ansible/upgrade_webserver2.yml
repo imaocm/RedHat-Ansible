@@ -1,0 +1,50 @@
+---
+- name: Upgrade Application
+  hosts: webservers
+  become: yes
+  serial: 1
+  tasks:
+
+  - name: Remove Server from LBL
+    haproxy:
+      state: disabled
+      host: "{{ inventory_hostname }}"
+      socket: /var/lib/haproxy/stats
+      wait: yes
+    delegate_to: "{{ item }}"
+    with_items: "{{ groups.lbservers }}"
+
+  - name: Upgrade app
+    template:
+      src: index-ver1.html.j2
+      dest: /var/www/html/index.html
+      owner: apache
+      group: apache
+    register: pageupgrade
+    
+  - name: Restart Web Server
+    reboot:
+    async: 1
+    poll: 0
+    ignore_errors: true
+    when: "pageupgrade.changed"
+
+
+  - name: Check if Web Service is started
+    wait_for:
+      host: "{{ inventory_hostname }}"
+      port: 80
+      state: started
+      timeout: 20
+    delegate_to: localhost
+    when: "pageupgrade.changed"
+  - name: Add the Server to LBL
+    haproxy:
+      state: enabled
+      host: "{{ inventory_hostname }}"
+      socket: /var/lib/haproxy/stats
+      wait: yes
+    delegate_to: "{{ item }}"
+    with_items: "{{ groups.lbservers }}"
+    
+

@@ -1,0 +1,4 @@
+# User specific aliases and functions
+alias virtansible27='source ~/virt/ansible-2.7.0/bin/activate'
+alias virtansible23='source ~/virt/ansible-2.3.0/bin/activate'
+alias virtansible-latest='source ~/virt/ansible-latest/bin/activate'

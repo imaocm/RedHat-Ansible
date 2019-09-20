@@ -1,0 +1,12 @@
+---
+# tasks file for roles/sample-mysql
+
+#Include Storage Task
+- include: storage.yml
+
+#Include MySQL Configuration Task
+- include: configure_mysql.yml
+
+#Include Firewall Configuration Task
+- include: configure_firewall.yml
+

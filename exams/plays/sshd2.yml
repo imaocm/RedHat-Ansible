@@ -1,0 +1,24 @@
+--- 
+- name: TASK4 - Configure SSH Server
+  hosts: all
+  become: yes
+  vars:
+  tasks:
+
+    - name: Edit the SSH Configuration Banner
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regex: "Banner" 
+        line: "Banner /etc/motd" 
+      
+    - name: Edit the SSH Configuration X11Forwarding
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regex: "^X11Forwarding" 
+        line: "X11Forwarding no" 
+    - name: Edit the SSH Configuration MaxAuthTries
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regex: "MaxAuthTries" 
+        line: "MaxAuthTries 3" 
+

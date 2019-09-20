@@ -1,0 +1,38 @@
+---
+# tasks file for roles/student.myapache
+
+
+- name: Install required packages
+  yum:
+    name:
+      - httpd
+      - firewalld
+    state: latest
+
+- name: Start and Enable Httpd and Firewalld
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - httpd
+    - firewalld
+  when: apache_enable
+
+- name: Open Port inf Firewall
+  firewalld:
+    service: http
+    state: enabled
+    permanent: yes
+    immediate: yes
+  when: apache_enable
+
+- name: Copy the Index File
+  template:
+    src: apache_indexhtml.j2
+    dest: /var/www/html/index.html
+    owner: root
+    mode: 0444
+  notify: Restart httpd
+  when: apache_enable
+

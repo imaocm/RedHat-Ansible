@@ -1,0 +1,7 @@
+<html>
+<head><title> My Page </title></head>
+<body>
+<h1> Welcome to {{ inventory_hostname }} | {% for ip in ansible_all_ipv4_addresses -%} {{ ip }} {% endfor -%} </h1>
+<h2> A new feature added   00</h2>
+</body>
+</html>

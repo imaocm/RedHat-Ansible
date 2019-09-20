@@ -1,0 +1,50 @@
+---
+- name: Impelmenting Playbooks
+  hosts: webservers
+  become: yes
+  vars:
+    - web_packages:
+      - httpd
+      - php
+      - mariadb-server
+      - php-mysql
+    - rules:
+      - http
+      - mysql
+    - web_services:
+      - httpd
+      - mariadb
+      - firewalld
+  tasks:
+  - block:
+    - name: Install LAMP Packages
+      yum: 
+        name:  "{{ web_packages }}"
+        state: latest
+  - block:
+    - name: Configure Firewall
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        immediate: true
+        permanent: true
+      with_items: "{{ rules }}"
+  - block:
+    - name: Start, Enable Web Services
+      service:
+        name: "{{ item }}"
+        state: started
+        enabled: true
+      with_items: "{{ web_services }}"
+    - name: Configure Web Index.html
+      copy: 
+        content: " This Webserver is Managed By Ansible \n"
+        dest: /var/www/html/index.html
+        mode: 0644
+        owner: apache
+        group: apache
+  - block:
+    - name: Test the web Servers
+      uri:
+        url: "http://{{ ansible_default_ipv4.address }}"
+        status_code: 200

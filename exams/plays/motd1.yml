@@ -1,0 +1,22 @@
+---
+- name: TASK3 - File Content
+  hosts: all
+  become: yes
+  vars:
+   - motd:
+       proxy: "Welcome to HAProxy server"
+       web: "Welcome to Apache server"
+       db: "Welcome to MySQL server"
+  tasks:
+
+  - name: Using Jinja2 to Simplify Task 
+    copy: 
+      content: > 
+            {% if inventory_hostname in groups['proxy'] -%}{{  motd.proxy }}
+            {% elif  inventory_hostname in groups['webservers'] -%}{{ motd.web }}
+            {% elif inventory_hostname in groups['database'] -%}{{ motd.db }}
+            {% endif -%}
+      dest: /etc/motd
+      mode: 0644
+      owner: root
+      group: root

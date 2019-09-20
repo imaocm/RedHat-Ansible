@@ -1,0 +1,98 @@
+---
+- name: TASK6 - Users and Groups
+  hosts: webservers:database
+  become: yes
+  vars_files:
+    - vars/user_list.yml
+    - secret.yml
+  tasks:
+
+    - name:  Create Users in WebServers Group
+      user:
+        name: "{{ item.username }}"
+        uid: "{{ item.uid }}"
+        shell: /bin/bash
+        comment: " Ansible User ! "
+        groups: wheel
+        append: yes
+        password: "{{ user_password | password_hash('sha512') }}"
+        update_password: on_create
+        generate_ssh_key: yes
+      with_items: "{{ users }}"
+      when:
+        - inventory_hostname in groups['webservers']
+        - " item.uid | string | first is version_compare(1) "
+
+
+    - name:  Create Users in Database Group
+      user:
+        name: "{{ item.username }}"
+        uid: "{{ item.uid }}"
+        shell: /bin/bash
+        comment: " Ansible User ! "
+        groups: wheel
+        append: yes
+        ssh_key_file: .ssh/id_rsa
+        password: "{{ user_password | password_hash('sha512') }}"
+        update_password: on_create
+        generate_ssh_key: yes
+      with_items: "{{ users }}"
+      when:
+        - inventory_hostname in groups['database']
+        - " item.uid | string | first == '2' "
+    - block:
+
+      - name: Fetch Users ssh keys
+        fetch:
+          src: /home/{{ item.username }}/.ssh/id_rsa.pub
+          dest: ssh/{{ item.username }}.ssh
+          flat: yes
+          state: present
+        with_items: "{{ users }}"
+        run_once: true
+
+      - name: Authorized Keys for webservers
+        authorized_key:
+          user: "{{ item.username }}"
+          key: "{{ lookup('file', 'ssh/{{ item.username }}.ssh') }}"
+          state: present
+        with_items: "{{ users }}"
+      when:
+          - inventory_hostname in groups['webservers']
+          - " item.uid | string | first == '1' "
+    - block:
+      - name: Fetch Users ssh keysi Database
+        fetch:
+          src: /home/{{ item.username }}/.ssh/id_rsa.pub
+          dest: ssh/{{ item.username }}.ssh
+          flat: yes
+          state: present
+        with_items: "{{ users }}"
+
+      - name: Authorized Keys for database
+        authorized_key:
+          user: "{{ item.username }}"
+          key: "{{ lookup('file' , 'ssh/{{ item.username }}.ssh') }}"
+          state: present
+        with_items: "{{ users }}"
+      when:
+          - inventory_hostname in groups['database']
+          - " item.uid | string | first == '2' "
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

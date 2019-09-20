@@ -1,0 +1,15 @@
+---
+- name: TASK17 - Services
+  hosts: webservers
+  become: yes
+  vars:
+    target: "multi-user"
+  tasks:
+
+
+  - name:  Create Symlink for "{{ target | mandatory }}"
+    file:
+      dest: "/etc/systemd/system/default.target"
+      src: "/usr/lib/systemd/system/{{ target }}.target"
+      force: yes
+      state: link 

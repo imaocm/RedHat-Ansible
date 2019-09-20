@@ -1,0 +1,29 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: Check if LBL are up
+      ping:
+      when: inventory_hostname in groups['lbservers']
+
+    - name: Print LBServers
+      debug:
+        msg: "1 - {{ item }}"
+      loop: "{{ groups.lbservers }}"
+
+    - name: Execute a script on LBserver
+      script: script.sh
+
+    - name: Check if files are created
+      stat:
+        path: /tmp/{{ item }}
+      register: sym
+      whith_items:
+        - file1
+        - file2
+
+    - name: Check if file exists
+      debug:
+        msg: " File Exist "
+      when: sym.stat.exists

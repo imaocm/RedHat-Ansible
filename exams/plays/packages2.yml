@@ -1,0 +1,25 @@
+---
+- name: TASK15 - Software Packages
+  hosts: all
+  become: yes
+  vars:
+    proxy_pack:
+      - tcpdump
+      - mailx
+    datbase_pack:
+      - lsof
+      - mailx
+  tasks:
+
+  - name: Install Softwares proxy
+    yum:
+      name: "{{ proxy_pack }}"
+      state: latest
+    when: inventory_hostname in groups['proxy']
+
+  - name: Install Softwares database
+    yum:
+      name: "{{ database_pack }}"
+      state: latest
+    when: inventory_hostname in groups['database']
+

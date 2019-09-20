@@ -1,0 +1,27 @@
+---
+- name: TASK3 - File Content
+  hosts: all
+  become: yes
+  vars:
+    role:
+       - HAProxy
+       - Apache
+       - MySQL
+    group:
+       - proxy
+       - webservers
+       - database
+  tasks:
+
+  - name: Editing Proxy
+    copy: 
+      content: "Welcome to {{ item.0 }} server\n"
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: 0644
+    with_together:
+      - "{{ role }}"
+      - "{{ group }}"
+    when: "inventory_hostname in groups['{{ item.1 }}']"
+

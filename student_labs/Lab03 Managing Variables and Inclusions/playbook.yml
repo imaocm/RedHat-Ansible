@@ -1,0 +1,46 @@
+---
+- name: Lab Managing Variables and Inclusions
+  hosts: webservers
+  become: yes
+  vars:
+    firewall: firewalld
+    rules:
+      - http
+      - mysql
+  tasks:
+    
+    - name: Include Variables
+      include_vars: vars/main.yml
+
+    - name: Include Task
+      include_tasks: tasks/main.yml
+
+
+    - name: Install Firewall
+      yum:
+        name: "{{ firewall }}"
+        state: latest
+
+
+    - name: Start and Enable Firewall
+      service: 
+        name: "{{ firewall }}"
+        state: started
+        enabled: true
+
+    - name: Open TCP 80 Port in the "{{ firewall }}"
+      firewalld:
+        service: "{{ item }}"
+        state: enabled
+        immediate: yes
+        permanent: yes
+      with_items: "{{ rules }}"
+
+    - name: Configure the web root
+      copy:
+        content: " {{ ansible_fqdn }} ({{ ansible_default_ipv4.address }})  has been customized by {{ ansible_user }} \n "
+        dest: "{{ web_root }}/index.html"
+        mode: 0644
+        owner: apache
+        group: apache
+

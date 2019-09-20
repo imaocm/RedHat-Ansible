@@ -1,0 +1,5 @@
+---
+- hosts: lbservers
+  become: yes
+  roles:
+    - geerlingguy.haproxy

@@ -1,0 +1,19 @@
+---
+- name: TASK14 - Use Archiving
+  hosts: database
+  become: yes
+  vars:
+    files:
+      - /mnt/mysql_backups/database_list.txt
+  tasks:
+
+  - name: Create a File 
+    shell: "touch /mnt/mysql_backups/database_list.txt creates=/mnt/mysql_backups/database_list.txt"
+
+  - name:  Archive and Zip the file
+    archive:
+      path: "{{ item }}"
+      dest: /mnt/mysql_backups/archive.gz
+      format: gz
+    with_items: "{{ files }}"
+

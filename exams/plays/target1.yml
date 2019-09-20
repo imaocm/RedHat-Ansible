@@ -1,0 +1,11 @@
+---
+- name: TASK17 - Services
+  hosts: webservers
+  become: yes
+  vars:
+    target: "multi-user"
+  tasks:
+
+  - name: Remove Symlink default.target
+    shell: "/bin/systemctl set-default {{ target | mandatory }}"
+

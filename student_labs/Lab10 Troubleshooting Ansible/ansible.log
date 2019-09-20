@@ -1,0 +1,134 @@
+2019-09-19 20:35:39,853 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:35:39,856 p=14793 u=automation |  playbook: playbook.yml
+2019-09-19 20:35:50,240 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:35:50,244 p=14801 u=automation |  playbook: playbook.yml
+2019-09-19 20:36:00,441 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:36:00,446 p=14809 u=automation |  playbook: playbook.yml
+2019-09-19 20:37:21,587 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:37:21,590 p=14831 u=automation |  playbook: playbook.yml
+2019-09-19 20:38:12,339 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:38:12,343 p=14854 u=automation |  PLAY [all] *****************************************************************************************
+2019-09-19 20:38:12,350 p=14854 u=automation |  TASK [Gathering Facts] *****************************************************************************
+2019-09-19 20:38:14,978 p=14854 u=automation |  ok: [material.example.com]
+2019-09-19 20:38:14,984 p=14854 u=automation |  ok: [ansible1.example.com]
+2019-09-19 20:38:14,995 p=14854 u=automation |  ok: [ansible3.example.com]
+2019-09-19 20:38:14,996 p=14854 u=automation |  ok: [ansible2.example.com]
+2019-09-19 20:38:15,012 p=14854 u=automation |  TASK [Check if LBL are up] *************************************************************************
+2019-09-19 20:38:15,129 p=14854 u=automation |  skipping: [ansible1.example.com]
+2019-09-19 20:38:15,129 p=14854 u=automation |  skipping: [ansible2.example.com]
+2019-09-19 20:38:15,155 p=14854 u=automation |  skipping: [ansible3.example.com]
+2019-09-19 20:38:15,516 p=14854 u=automation |  ok: [material.example.com]
+2019-09-19 20:38:15,537 p=14854 u=automation |  TASK [Print LBServers] *****************************************************************************
+2019-09-19 20:38:15,819 p=14854 u=automation |  ok: [ansible1.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:38:15,821 p=14854 u=automation |  ok: [ansible2.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:38:15,852 p=14854 u=automation |  ok: [material.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:38:15,886 p=14854 u=automation |  ok: [ansible3.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:38:15,888 p=14854 u=automation |  PLAY RECAP *****************************************************************************************
+2019-09-19 20:38:15,888 p=14854 u=automation |  ansible1.example.com       : ok=2    changed=0    unreachable=0    failed=0   
+2019-09-19 20:38:15,888 p=14854 u=automation |  ansible2.example.com       : ok=2    changed=0    unreachable=0    failed=0   
+2019-09-19 20:38:15,888 p=14854 u=automation |  ansible3.example.com       : ok=2    changed=0    unreachable=0    failed=0   
+2019-09-19 20:38:15,888 p=14854 u=automation |  material.example.com       : ok=3    changed=0    unreachable=0    failed=0   
+2019-09-19 20:38:38,800 p=14935 u=automation |  ERROR! Unexpected Exception, this is probably a bug: [Errno 32] Broken pipe
+2019-09-19 20:38:38,812 p=14935 u=automation |  the full traceback was:
+
+Traceback (most recent call last):
+  File "/bin/ansible-playbook", line 117, in <module>
+    cli.parse()
+  File "/usr/lib/python2.7/site-packages/ansible/cli/playbook.py", line 72, in parse
+    super(PlaybookCLI, self).parse()
+  File "/usr/lib/python2.7/site-packages/ansible/cli/__init__.py", line 579, in parse
+    self.options, self.args = self.parser.parse_args(self.args[1:])
+  File "/usr/lib64/python2.7/optparse.py", line 1399, in parse_args
+    stop = self._process_args(largs, rargs, values)
+  File "/usr/lib64/python2.7/optparse.py", line 1439, in _process_args
+    self._process_long_opt(rargs, values)
+  File "/usr/lib64/python2.7/optparse.py", line 1514, in _process_long_opt
+    option.process(opt, value, values, self)
+  File "/usr/lib64/python2.7/optparse.py", line 788, in process
+    self.action, self.dest, opt, value, values, parser)
+  File "/usr/lib64/python2.7/optparse.py", line 810, in take_action
+    parser.print_help()
+  File "/usr/lib64/python2.7/optparse.py", line 1669, in print_help
+    file.write(self.format_help().encode(encoding, "replace"))
+IOError: [Errno 32] Broken pipe
+
+2019-09-19 20:39:29,528 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:39:29,533 p=14953 u=automation |  PLAY [all] *****************************************************************************************
+2019-09-19 20:39:29,541 p=14953 u=automation |  TASK [Gathering Facts] *****************************************************************************
+2019-09-19 20:39:31,542 p=14953 u=automation |  ok: [ansible2.example.com]
+2019-09-19 20:39:31,548 p=14953 u=automation |  ok: [material.example.com]
+2019-09-19 20:39:31,559 p=14953 u=automation |  ok: [ansible1.example.com]
+2019-09-19 20:39:31,561 p=14953 u=automation |  ok: [ansible3.example.com]
+2019-09-19 20:39:31,577 p=14953 u=automation |  TASK [Check if LBL are up] *************************************************************************
+2019-09-19 20:39:31,690 p=14953 u=automation |  skipping: [ansible1.example.com]
+2019-09-19 20:39:31,691 p=14953 u=automation |  skipping: [ansible2.example.com]
+2019-09-19 20:39:31,692 p=14953 u=automation |  skipping: [ansible3.example.com]
+2019-09-19 20:39:32,071 p=14953 u=automation |  ok: [material.example.com]
+2019-09-19 20:39:32,088 p=14953 u=automation |  TASK [Print LBServers] *****************************************************************************
+2019-09-19 20:39:32,247 p=14953 u=automation |  ok: [ansible1.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:39:32,249 p=14953 u=automation |  ok: [ansible2.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:39:32,287 p=14953 u=automation |  ok: [ansible3.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:39:32,300 p=14953 u=automation |  ok: [material.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:39:32,303 p=14953 u=automation |  PLAY RECAP *****************************************************************************************
+2019-09-19 20:39:32,304 p=14953 u=automation |  ansible1.example.com       : ok=2    changed=0    unreachable=0    failed=0   
+2019-09-19 20:39:32,304 p=14953 u=automation |  ansible2.example.com       : ok=2    changed=0    unreachable=0    failed=0   
+2019-09-19 20:39:32,305 p=14953 u=automation |  ansible3.example.com       : ok=2    changed=0    unreachable=0    failed=0   
+2019-09-19 20:39:32,305 p=14953 u=automation |  material.example.com       : ok=3    changed=0    unreachable=0    failed=0   
+2019-09-19 20:47:14,469 passlib.registry registered 'md5_crypt' handler: <class 'passlib.handlers.md5_crypt.md5_crypt'>
+2019-09-19 20:47:14,474 p=15096 u=automation |  PLAY [all] *****************************************************************************************
+2019-09-19 20:47:14,481 p=15096 u=automation |  TASK [Gathering Facts] *****************************************************************************
+2019-09-19 20:47:16,537 p=15096 u=automation |  ok: [ansible2.example.com]
+2019-09-19 20:47:16,545 p=15096 u=automation |  ok: [ansible3.example.com]
+2019-09-19 20:47:16,556 p=15096 u=automation |  ok: [material.example.com]
+2019-09-19 20:47:16,558 p=15096 u=automation |  ok: [ansible1.example.com]
+2019-09-19 20:47:16,575 p=15096 u=automation |  TASK [Check if LBL are up] *************************************************************************
+2019-09-19 20:47:16,684 p=15096 u=automation |  skipping: [ansible3.example.com]
+2019-09-19 20:47:16,684 p=15096 u=automation |  skipping: [ansible1.example.com]
+2019-09-19 20:47:16,698 p=15096 u=automation |  skipping: [ansible2.example.com]
+2019-09-19 20:47:17,082 p=15096 u=automation |  ok: [material.example.com]
+2019-09-19 20:47:17,099 p=15096 u=automation |  TASK [Print LBServers] *****************************************************************************
+2019-09-19 20:47:17,255 p=15096 u=automation |  ok: [ansible3.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:47:17,278 p=15096 u=automation |  ok: [ansible1.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:47:17,293 p=15096 u=automation |  ok: [ansible2.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:47:17,311 p=15096 u=automation |  ok: [material.example.com] => (item=material.example.com) => {
+    "msg": "1 - material.example.com"
+}
+2019-09-19 20:47:17,328 p=15096 u=automation |  TASK [Execute a script on LBserver] ****************************************************************
+2019-09-19 20:47:17,700 p=15096 u=automation |  changed: [ansible3.example.com]
+2019-09-19 20:47:17,712 p=15096 u=automation |  changed: [ansible1.example.com]
+2019-09-19 20:47:17,721 p=15096 u=automation |  changed: [ansible2.example.com]
+2019-09-19 20:47:17,742 p=15096 u=automation |  changed: [material.example.com]
+2019-09-19 20:47:17,759 p=15096 u=automation |  TASK [Check if files are created] ******************************************************************
+2019-09-19 20:47:17,854 p=15096 u=automation |  fatal: [ansible3.example.com]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'item' is undefined\n\nThe error appears to have been in '/home/automation/student_labs/Lab10 Troubleshooting Ansible/playbook.yml': line 18, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Check if files are created\n      ^ here\n"}
+2019-09-19 20:47:17,857 p=15096 u=automation |  fatal: [ansible1.example.com]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'item' is undefined\n\nThe error appears to have been in '/home/automation/student_labs/Lab10 Troubleshooting Ansible/playbook.yml': line 18, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Check if files are created\n      ^ here\n"}
+2019-09-19 20:47:17,860 p=15096 u=automation |  fatal: [ansible2.example.com]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'item' is undefined\n\nThe error appears to have been in '/home/automation/student_labs/Lab10 Troubleshooting Ansible/playbook.yml': line 18, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Check if files are created\n      ^ here\n"}
+2019-09-19 20:47:17,874 p=15096 u=automation |  fatal: [material.example.com]: FAILED! => {"msg": "The task includes an option with an undefined variable. The error was: 'item' is undefined\n\nThe error appears to have been in '/home/automation/student_labs/Lab10 Troubleshooting Ansible/playbook.yml': line 18, column 7, but may\nbe elsewhere in the file depending on the exact syntax problem.\n\nThe offending line appears to be:\n\n\n    - name: Check if files are created\n      ^ here\n"}
+2019-09-19 20:47:17,876 p=15096 u=automation |  	to retry, use: --limit @/home/automation/student_labs/Lab10 Troubleshooting Ansible/playbook.retry
+
+2019-09-19 20:47:17,879 p=15096 u=automation |  PLAY RECAP *****************************************************************************************
+2019-09-19 20:47:17,879 p=15096 u=automation |  ansible1.example.com       : ok=3    changed=1    unreachable=0    failed=1   
+2019-09-19 20:47:17,880 p=15096 u=automation |  ansible2.example.com       : ok=3    changed=1    unreachable=0    failed=1   
+2019-09-19 20:47:17,881 p=15096 u=automation |  ansible3.example.com       : ok=3    changed=1    unreachable=0    failed=1   
+2019-09-19 20:47:17,882 p=15096 u=automation |  material.example.com       : ok=4    changed=1    unreachable=0    failed=1   

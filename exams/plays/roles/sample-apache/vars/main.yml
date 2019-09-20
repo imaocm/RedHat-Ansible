@@ -1,0 +1,14 @@
+---
+# vars file for roles/sample-apache
+
+web_packages:
+  - httpd
+  - mod_ssl
+  - php
+
+web_service:
+  - httpd
+
+rules:
+  - http
+  - https

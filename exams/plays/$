@@ -1,0 +1,21 @@
+---
+- name: TASK13 - Use Conditionals to Control Play Execution
+  hosts: all:localhost
+  become: yes
+  tasks:
+
+  - name: Set Memory as fact
+    set_fact:
+      host_memory = 900
+
+  - block:
+    - name: Performance tunning for servers
+      sysctl:
+        name: vm.swappiness
+        value: 10
+        state: present
+        reload: yes
+    when: 
+      - ansible_memtotal_mb | int >= host_memory
+
+   

@@ -1,0 +1,11 @@
+[proxy]
+material.example.com
+
+[webservers]
+ansible1.example.com
+ansible2.example.com
+
+[database]
+ansible3.example.com
+
+
